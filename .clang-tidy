@@ -1,0 +1,14 @@
+Checks: >
+  clang-diagnostic-*,
+  clang-analyzer-*,
+  readability-*,
+  modernize-*,
+  performance-*,
+  bugprone-*,
+  -modernize-use-trailing-return-type,
+  -readability-magic-numbers,
+  -readability-named-parameter
+
+WarningsAsErrors: ""
+HeaderFilterRegex: ".*"
+FormatStyle: none
