@@ -1,27 +1,70 @@
 # CppTemplate
 
-Modern C++ project template with CMake, Google Test, clang-tidy, and cppcheck.
+Modern C++ umbrella project template with CMake, Google Test, clang-tidy, and cppcheck.
 
-## Initialising this template
+## Getting started
 
-```bash
-bash init.sh --init MyProjectName
-```
-
-Replaces all `CppTemplate` references with your project name and renames stub files accordingly.
-
-## Building
+Rename the project (replaces `CppTemplate` throughout):
 
 ```bash
-cmake -B build -DCMAKE_BUILD_TYPE=Debug
-cmake --build build
+bash init.sh --init MyProject
 ```
 
-## Testing
+Add your first module:
 
 ```bash
-cd build && ctest --output-on-failure
+bash init.sh --add-module my-module
 ```
+
+## `run` commands
+
+All day-to-day operations go through the `run` script.
+
+### Build
+
+```bash
+./run build my-module   # build only my-module
+./run build all         # build all modules
+```
+
+### Run
+
+```bash
+./run run my-module     # run my-module
+./run run all           # run all modules
+```
+
+### Test
+
+```bash
+./run test my-module    # run tests for my-module
+./run test all          # run all tests
+```
+
+### Clean
+
+```bash
+./run clean             # remove the build directory
+```
+
+## Module layout
+
+Each module lives under `src/<name>/` and follows this structure:
+
+```
+src/my-module/
+  CMakeLists.txt        # defines my-module-lib (static) + my-module (executable)
+  main.cpp
+  my-module.cpp
+  include/
+    my-module.h
+
+test/my-module/
+  CMakeLists.txt        # links against my-module-lib
+  my-module_test.cpp
+```
+
+New modules are auto-discovered — no manual wiring needed in CMake.
 
 ## Requirements
 
@@ -34,7 +77,3 @@ cd build && ctest --output-on-failure
 - **ccache** — compiler caching
 - **clang-tidy** — static analysis
 - **cppcheck** — static analysis
-
----
-
-Based on https://gregorykelleher.com/modern_cpp_project_structuring
